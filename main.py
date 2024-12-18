@@ -10,20 +10,23 @@ def create_db():
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         username TEXT NOT NULL UNIQUE,
                         password_hash TEXT NOT NULL,
-                        role TEXT NOT NULL)''')
+                        role TEXT NOT NULL
+                    )''')
 
     cursor.execute('''CREATE TABLE IF NOT EXISTS Orders (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        user_id INTEGER,
-                        order_name TEXT NOT NULL,
-                        status TEXT NOT NULL,
-                        FOREIGN KEY(user_id) REFERENCES Users(id))''')
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            user_id INTEGER NOT NULL,
+                            order_name TEXT NOT NULL,
+                            status TEXT NOT NULL,
+                            responsible_id INTEGER
+                        )''')
 
     cursor.execute('''CREATE TABLE IF NOT EXISTS Materials (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         material_name TEXT NOT NULL,
                         quantity INTEGER NOT NULL,
-                        unit_price REAL NOT NULL)''')
+                        unit_price REAL NOT NULL
+                    )''')
 
     conn.commit()
     conn.close()

@@ -16,8 +16,8 @@ def show_all_orders():
 
 
 def approve_or_reject_order(order_id, action, manager_id):
-    if action not in ["одобрен", "отклонен"]:
-        print("Неверное действие. Выберите 'одобрен' или 'отклонен'.")
+    if action not in ["одобрен", "отклонён"]:
+        print("Неверное действие. Выберите 'одобрен' или 'отклонён'.")
         return
 
     conn = sqlite3.connect('database.db')
