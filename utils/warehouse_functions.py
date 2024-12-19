@@ -16,14 +16,20 @@ def show_materials():
 
 
 def add_material(material_name, quantity, unit_price):
-
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
-    cursor.execute("UPDATE Materials SET quantity = quantity + ?, unit_price = ? WHERE material_name = ?",
-                   (quantity, unit_price, material_name))
+    cursor.execute("SELECT * FROM Materials WHERE material_name = ?", (material_name,))
+    existing_material = cursor.fetchone()
+
+    if existing_material:
+        cursor.execute("UPDATE Materials SET quantity = quantity + ?, unit_price = ? WHERE material_name = ?",
+                       (quantity, unit_price, material_name))
+        print(f"Поступление материала '{material_name}' на {quantity} единиц по цене {unit_price} за единицу добавлено.")
+    else:
+        cursor.execute("INSERT INTO Materials (material_name, quantity, unit_price) VALUES (?, ?, ?)",
+                       (material_name, quantity, unit_price))
+        print(f"Материал '{material_name}' добавлен с количеством {quantity} и ценой {unit_price} за единицу.")
 
     conn.commit()
     conn.close()
-
-    print(f"Поступление материала '{material_name}' на {quantity} единиц по цене {unit_price} за единицу добавлено.")

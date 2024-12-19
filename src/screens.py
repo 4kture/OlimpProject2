@@ -46,8 +46,7 @@ def manager_screen(manager_id):
             approve_or_reject_order(order_id, action, manager_id)
         elif choice == '3':
             order_id = int(input("Введите ID заказа для изменения статуса: "))
-            new_status = input("Введите новый статус заказа: ")
-            update_order_status(order_id, new_status)
+            update_order_status(order_id)
         elif choice == '4':
             print("Выход...")
             break

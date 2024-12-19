@@ -19,7 +19,7 @@ def create_db():
                             order_name TEXT NOT NULL,
                             status TEXT NOT NULL,
                             responsible_id INTEGER
-                        )''')
+                    )''')
 
     cursor.execute('''CREATE TABLE IF NOT EXISTS Materials (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -50,7 +50,7 @@ def main():
                 if user[3] == 'заказчик':
                     customer_screen(user[0])
                 elif user[3] == 'менеджер':
-                    manager_screen()
+                    manager_screen(user[0])
                 elif user[3] == 'кладовщик':
                     warehouse_screen()
                 elif user[3] == 'руководитель':
