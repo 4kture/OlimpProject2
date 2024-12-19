@@ -32,6 +32,22 @@ def create_db():
     conn.close()
 
 
+def insert_multiple_data():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    materials_data = [
+        ('Материал 1', 100, 50.0),
+        ('Материал 2', 200, 30.0),
+        ('Материал 3', 150, 45.0)
+    ]
+    cursor.executemany("INSERT INTO Materials (material_name, quantity, unit_price) VALUES (?, ?, ?)", materials_data)
+
+    conn.commit()
+    conn.close()
+    print("Данные успешно вставлены.")
+
+
 def main():
     create_db()
 
